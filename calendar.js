@@ -1,12 +1,12 @@
 //
 // PhoneGap Calendar Plugin
-// Author: Felix Montanez 
+// Author: Felix Montanez
 // Created: 01-17-2012
 //
-// Contributors : 
+// Contributors :
 // Michael Brooks
 // Sean Bedford
-// 
+//
 
 
 
@@ -19,7 +19,7 @@ calendarPlugin.prototype.createEvent = function(title,location,notes,startDate,e
         console.log("calendarPlugin.createEvent failure: errorCallback parameter must be a function");
         return
     }
-    
+
     if (typeof successCallback != "function") {
         console.log("calendarPlugin.createEvent failure: successCallback parameter must be a function");
         return
@@ -27,12 +27,25 @@ calendarPlugin.prototype.createEvent = function(title,location,notes,startDate,e
     cordova.exec(successCallback,errorCallback,"calendarPlugin","createEvent", [title,location,notes,startDate,endDate]);
 };
 
+calendarPlugin.prototype.createEventWithUi = function(title,location,notes,startDate,endDate, successCallback, errorCallback) {
+    if (typeof errorCallback != "function")  {
+        console.log("calendarPlugin.createEvent failure: errorCallback parameter must be a function");
+        return
+    }
+
+    if (typeof successCallback != "function") {
+        console.log("calendarPlugin.createEvent failure: successCallback parameter must be a function");
+        return
+    }
+    cordova.exec(successCallback,errorCallback,"calendarPlugin","createEventWithUi", [title,location,notes,startDate,endDate]);
+};
+
 calendarPlugin.prototype.deleteEvent = function(title,location,notes,startDate,endDate, deleteAll, successCallback, errorCallback) {
     if (typeof errorCallback != "function")  {
         console.log("calendarPlugin.deleteEvent failure: errorCallback parameter must be a function");
         return
     }
-    
+
     if (typeof successCallback != "function") {
         console.log("calendarPlugin.deleteEvent failure: successCallback parameter must be a function");
         return
@@ -45,7 +58,7 @@ calendarPlugin.prototype.findEvent = function(title,location,notes,startDate,end
         console.log("calendarPlugin.findEvent failure: errorCallback parameter must be a function");
         return
     }
-    
+
     if (typeof successCallback != "function") {
         console.log("calendarPlugin.findEvent failure: successCallback parameter must be a function");
         return
@@ -58,7 +71,7 @@ calendarPlugin.prototype.modifyEvent = function(title,location,notes,startDate,e
         console.log("calendarPlugin.modifyEvent failure: errorCallback parameter must be a function");
         return
     }
-    
+
     if (typeof successCallback != "function") {
         console.log("calendarPlugin.modifyEvent failure: successCallback parameter must be a function");
         return
@@ -72,7 +85,7 @@ calendarPlugin.install = function()
     {
         window.plugins = {};
     }
-    
+
     window.plugins.calendarPlugin = new calendarPlugin();
     return window.plugins.calendarPlugin;
 };
